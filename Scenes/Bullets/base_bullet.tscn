@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c2oqm36g3y01n"]
+
+[ext_resource type="PackedScene" uid="uid://uqyq4a336f5q" path="res://Scenes/LifeTimer/life_timer.tscn" id="1_kd1mq"]
+[ext_resource type="Script" uid="uid://cin8gmxnrmp1a" path="res://Scenes/Bullets/BaseBullet.gd" id="1_yj0dc"]
+
+[node name="BaseBullet" type="Area2D" unique_id=1595782987]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_yj0dc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1078588468]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1826650696]
+
+[node name="LifeTimer" parent="." unique_id=1248859069 instance=ExtResource("1_kd1mq")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://d3vpogoq1jb8e"]
+
+[ext_resource type="Script" uid="uid://d32yt5twkhwrg" path="res://Scenes/Pickup/pickup.gd" id="1_526qn"]
+[ext_resource type="Texture2D" uid="uid://37kjwcnlgssd" path="res://assests/pickups/sparkleparticle.png" id="2_7gud3"]
+[ext_resource type="Texture2D" uid="uid://cl3jisqja07v2" path="res://assests/pickups/crystal1.png" id="2_eos4x"]
+[ext_resource type="PackedScene" uid="uid://uqyq4a336f5q" path="res://Scenes/LifeTimer/life_timer.tscn" id="2_qf50m"]
+[ext_resource type="Texture2D" uid="uid://b6jeo86srlbmr" path="res://assests/pickups/crystal2.png" id="3_7gud3"]
+[ext_resource type="AudioStream" uid="uid://bmsut55pmi12q" path="res://assests/sound/itempickup.wav" id="3_eos4x"]
+[ext_resource type="Script" uid="uid://cwm4tccpchudi" path="res://Scenes/Pickup/Anim.gd" id="3_sn6br"]
+
+[sub_resource type="Curve" id="Curve_u6par"]
+_data = [Vector2(0, 0.24580169), 0.0, 0.0, 0, 0, Vector2(0.99242425, 0.43344915), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn6br"]
+atlas = ExtResource("2_eos4x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6par"]
+atlas = ExtResource("3_7gud3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_syiqb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sn6br")
+}],
+"loop": true,
+"name": &"crystal1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6par")
+}],
+"loop": true,
+"name": &"crystal2",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gud3"]
+radius = 2.1906703
+height = 4.3813405
+
+[node name="Pickup" type="Area2D" unique_id=1690635517]
+texture_filter = 1
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_526qn")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1366249243]
+texture_filter = 1
+amount = 40
+texture = ExtResource("2_7gud3")
+speed_scale = 1.2
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+spread = 20.0
+gravity = Vector2(0, 1)
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.6
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_u6par")
+
+[node name="Anim" type="AnimatedSprite2D" parent="." unique_id=1732043154]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_syiqb")
+animation = &"crystal2"
+script = ExtResource("3_sn6br")
+speed = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1114034880]
+position = Vector2(0, -1.7053026e-13)
+rotation = -0.2617994
+shape = SubResource("CapsuleShape2D_7gud3")
+
+[node name="LifeTimer" parent="." unique_id=380540299 instance=ExtResource("2_qf50m")]
+life_time = 15.0
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=2065843272]
+stream = ExtResource("3_eos4x")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=458282850]
+texture_filter = 1
+amount = 7
+texture = ExtResource("2_7gud3")
+speed_scale = 0.7
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, 0)
+spread = 20.0
+gravity = Vector2(0, 1)
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.6
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_u6par")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

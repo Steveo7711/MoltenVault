@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://cju3282hxdhwv"]
+
+[ext_resource type="PackedScene" uid="uid://c2oqm36g3y01n" path="res://Scenes/Bullets/base_bullet.tscn" id="1_8ln4g"]
+[ext_resource type="Texture2D" uid="uid://btbhfkqoqfv46" path="res://assests/bullets/enemybullet.png" id="2_b3chp"]
+[ext_resource type="Texture2D" uid="uid://dtcnqdvn7f6ge" path="res://assests/bullets/enemybulletparticle.png" id="3_0hbaj"]
+[ext_resource type="AudioStream" uid="uid://8mqvv0njnlx0" path="res://assests/sound/frogsludgebullet.wav" id="4_lqsdr"]
+
+[sub_resource type="Curve" id="Curve_lqsdr"]
+_data = [Vector2(0.013257578, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hbaj"]
+radius = 12.775861
+
+[sub_resource type="Animation" id="Animation_lqsdr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_b3chp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nnp0s"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_b3chp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tb4ff"]
+_data = {
+&"RESET": SubResource("Animation_lqsdr"),
+&"default": SubResource("Animation_nnp0s")
+}
+
+[node name="EnemyBullet" unique_id=2116799003 instance=ExtResource("1_8ln4g")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" parent="." index="0" unique_id=1078588468]
+texture_filter = 1
+texture = ExtResource("2_b3chp")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="1" unique_id=152362851]
+texture_filter = 1
+amount = 15
+texture = ExtResource("3_0hbaj")
+lifetime = 0.6
+preprocess = 0.5
+explosiveness = 0.2
+randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 75)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 0.2
+color = Color(1, 1, 1, 0.43137255)
+hue_variation_min = -0.34
+hue_variation_max = 1.0
+anim_speed_curve = SubResource("Curve_lqsdr")
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1826650696]
+scale = Vector2(0.39136308, 0.39136308)
+shape = SubResource("CircleShape2D_0hbaj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=916796392]
+libraries/ = SubResource("AnimationLibrary_tb4ff")
+autoplay = &"default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5" unique_id=764101847]
+stream = ExtResource("4_lqsdr")
+volume_db = -24.679
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

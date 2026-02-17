@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cgm0ij1arb8ea"]
+
+[ext_resource type="Script" uid="uid://c8sn72i83opie" path="res://Scenes/LavaPool/KillFloor.gd" id="1_mfw3s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_daqb8"]
+size = Vector2(237, 20)
+
+[node name="KillFloor" type="Area2D" unique_id=435146254]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_mfw3s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=545710573]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=424901101]
+position = Vector2(108.5, 0)
+shape = SubResource("RectangleShape2D_daqb8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

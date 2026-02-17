@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://vcyfmd3crmqo"]
+
+[ext_resource type="PackedScene" uid="uid://c2oqm36g3y01n" path="res://Scenes/Bullets/base_bullet.tscn" id="1_ljjqt"]
+[ext_resource type="Texture2D" uid="uid://cnf8tbjjgo0dy" path="res://assests/bullets/freezebullet.png" id="2_c845f"]
+[ext_resource type="Texture2D" uid="uid://cls3n74x7uygd" path="res://assests/bullets/freezebulletpaticle.png" id="3_ljjqt"]
+[ext_resource type="AudioStream" uid="uid://diwkhnwimhggo" path="res://assests/sound/freezeshot.wav" id="4_h8ykn"]
+
+[sub_resource type="Curve" id="Curve_ljjqt"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.0037878826, -1), 0.0, 2.0076046, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hepy2"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5435606, -0.36405253), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_h8ykn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6420455, 0.36849427), 0.0, 0.0, 0, 0, Vector2(0.9905304, 0.025676847), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c845f"]
+radius = 10.677368
+
+[sub_resource type="Animation" id="Animation_hepy2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c845f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dsatr"]
+resource_name = "bullet"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c845f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 0.37893033),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8w8k1"]
+_data = {
+&"RESET": SubResource("Animation_hepy2"),
+&"bullet": SubResource("Animation_dsatr")
+}
+
+[node name="PlayerBullet" unique_id=68134170 instance=ExtResource("1_ljjqt")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite2D" parent="." index="0" unique_id=1078588468]
+texture_filter = 1
+texture = ExtResource("2_c845f")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="1" unique_id=1301651130]
+texture_filter = 1
+amount = 20
+texture = ExtResource("3_ljjqt")
+lifetime = 0.3
+preprocess = 0.5
+randomness = 0.87
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 60.0
+gravity = Vector2(0, 350)
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angular_velocity_curve = SubResource("Curve_ljjqt")
+angle_min = -180.0
+angle_max = 180.0
+angle_curve = SubResource("Curve_hepy2")
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_h8ykn")
+hue_variation_max = 1.0
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1826650696]
+scale = Vector2(-0.46828014, -0.46828014)
+shape = SubResource("CircleShape2D_c845f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=1755668059]
+libraries/ = SubResource("AnimationLibrary_8w8k1")
+autoplay = &"bullet"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="5" unique_id=879711657]
+stream = ExtResource("4_h8ykn")
+volume_db = -7.69
+autoplay = true
+attenuation = 0.43527484
