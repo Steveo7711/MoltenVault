@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://b5sig43k6yhtx"]
+
+[ext_resource type="Texture2D" uid="uid://ciaxqqth5316j" path="res://assests/lavasprite.png" id="1_0ghyo"]
+[ext_resource type="Shader" uid="uid://w7gmfq7nqigd" path="res://Scenes/LavaPool/Lava.tres" id="1_teerl"]
+[ext_resource type="Script" uid="uid://ciaex3ujks10k" path="res://Scenes/LavaPool/Line2d.gd" id="3_pjtqv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjtqv"]
+shader = ExtResource("1_teerl")
+shader_parameter/FloatParameter = 1.4550000691125
+
+[sub_resource type="Gradient" id="Gradient_rleqy"]
+offsets = PackedFloat32Array(0.19582506, 0.75049704, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.25944334, 0.25944334, 0.25944334, 1, 0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ovt2"]
+
+[node name="lava" type="Node2D" unique_id=531310048]
+texture_filter = 1
+
+[node name="Node2D" type="Node2D" parent="." unique_id=75641757]
+texture_filter = 1
+
+[node name="Line2D" type="Line2D" parent="Node2D" unique_id=178813651]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_pjtqv")
+points = PackedVector2Array(0, 0, 0, 367)
+width = 20.0
+texture = ExtResource("1_0ghyo")
+texture_mode = 1
+script = ExtResource("3_pjtqv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Node2D/Line2D" unique_id=736267026]
+position = Vector2(0, 7)
+speed_scale = 0.2
+randomness = 0.36
+lifetime_randomness = 0.22
+emission_shape = 1
+emission_sphere_radius = 13.01
+spread = 66.85
+gravity = Vector2(0, 800)
+scale_amount_min = 0.6
+scale_amount_max = 4.0
+color = Color(1, 0.8973333, 0.120000005, 1)
+color_initial_ramp = SubResource("Gradient_rleqy")
+
+[node name="lavaRay" type="RayCast2D" parent="Node2D/Line2D" unique_id=856392267]
+visible = false
+target_position = Vector2(0, 500)
+
+[node name="Area2D" type="Area2D" parent="Node2D" unique_id=141229458]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1338659754]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_1ovt2")
