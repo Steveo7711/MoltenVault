@@ -35,4 +35,12 @@ func on_create_bullet(pos: Vector2, dir: Vector2, speed: float, ob_type: Constan
 	
 	var nb: Bullet = OBJECT_SCENES[ob_type].instantiate()
 	nb.setup(pos, dir, speed)
-	add_child(nb)  # add immediately instead of deferred so we can reference it
+	
+	# Set bullet owner based on type
+	#if i add more bullet types later i might need to update the logic here to add more elif statments checking each bullet type!!!
+	if ob_type == Constants.ObjectType.BULLET_PLAYER:
+		nb.bullet_owner = "player"
+	else:
+		nb.bullet_owner = "enemy"
+	
+	add_child(nb)

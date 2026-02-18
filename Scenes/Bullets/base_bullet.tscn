@@ -16,3 +16,4 @@ scale = Vector2(0.5, 0.5)
 [node name="LifeTimer" parent="." unique_id=1248859069 instance=ExtResource("1_kd1mq")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

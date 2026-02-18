@@ -86,7 +86,7 @@ _data = {
 
 [node name="PlayerBullet" unique_id=68134170 instance=ExtResource("1_ljjqt")]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 5
 
 [node name="Sprite2D" parent="." index="0" unique_id=1078588468]
 texture_filter = 1

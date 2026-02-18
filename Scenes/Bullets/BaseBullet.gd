@@ -3,6 +3,7 @@ extends Area2D
 class_name Bullet
 
 var _direction: Vector2 = Vector2(50, -50)
+var bullet_owner: String = "player"  # or "enemy"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,10 +20,16 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	monitoring = true
 
+func _on_body_entered(body: Node2D) -> void:
+	if bullet_owner == "enemy":
+		if body is Player or body is StaticBody2D or body is TileMapLayer:
+			queue_free()
+	elif bullet_owner == "player":
+		if body is EnemyBase or body is StaticBody2D or body is TileMapLayer:
+			queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
-	queue_free()
-
-
-func _on_body_entered(body: Node2D) -> void:
+	# ignore other bullets
+	if area is Bullet:
+		return
 	queue_free()
