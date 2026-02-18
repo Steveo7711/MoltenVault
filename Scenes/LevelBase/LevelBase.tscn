@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://pfmxw18stl43" path="res://Scenes/Player/player.tscn" id="2_bgw71"]
 [ext_resource type="PackedScene" uid="uid://d3vpogoq1jb8e" path="res://Scenes/Pickup/pickup.tscn" id="4_3lxj6"]
 [ext_resource type="PackedScene" uid="uid://csy0p26houdgk" path="res://Scenes/EnemyBase/Frogy.tscn" id="6_ooqsx"]
+[ext_resource type="PackedScene" uid="uid://b5sig43k6yhtx" path="res://Scenes/LavaPool/Lava.tscn" id="8_dufl6"]
 [ext_resource type="PackedScene" uid="uid://cgm0ij1arb8ea" path="res://Scenes/LavaPool/KillFloor.tscn" id="8_o536s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgw71"]
@@ -201,6 +202,10 @@ sources/0 = SubResource("TileSetAtlasSource_bgw71")
 [node name="Player" parent="." unique_id=2058204290 instance=ExtResource("2_bgw71")]
 position = Vector2(246, 59)
 fell_off_y = 500.0
+
+[node name="Lava" parent="." unique_id=462743347 instance=ExtResource("8_dufl6")]
+position = Vector2(340, 0)
+scale = Vector2(0.4, 0.4)
 
 [node name="Platforms" type="TileMapLayer" parent="." unique_id=1981422571]
 texture_filter = 1

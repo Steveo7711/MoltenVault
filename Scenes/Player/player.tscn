@@ -283,7 +283,7 @@ font_color = Color(0.29000002, 0.66866666, 1, 1)
 radius = 4.1856956
 height = 28.286873
 
-[node name="Player" type="CharacterBody2D" unique_id=2058204290]
+[node name="Player" type="CharacterBody2D" unique_id=2058204290 groups=["Player"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_a3d8c")

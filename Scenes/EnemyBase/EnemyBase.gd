@@ -15,20 +15,19 @@ const FALL_OFF_Y: int = 200.0
 var _gravity: float = 800.0
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_player_ref = get_tree().get_first_node_in_group(Constants.PLAYER_GROUP)
-	if _player_ref == null:
-		queue_free()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# Find player lazily if not found yet
+	if _player_ref == null:
+		_player_ref = get_tree().get_first_node_in_group(Constants.PLAYER_GROUP)
+		return
+	
 	if global_position.y > FALL_OFF_Y:
 		queue_free()
-		
 
 func flip_me() -> void:
+	if _player_ref == null:
+		return
 	animated_sprite_2d.flip_h = _player_ref.global_position.x > animated_sprite_2d.global_position.x
 
 func die() -> void:
@@ -48,4 +47,5 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
-	die()
+	if area is Bullet:
+		die()

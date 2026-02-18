@@ -74,8 +74,10 @@ _data = {
 }
 
 [node name="EnemyBullet" unique_id=2116799003 instance=ExtResource("1_8ln4g")]
+z_index = 5
+z_as_relative = false
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 
 [node name="Sprite2D" parent="." index="0" unique_id=1078588468]
 texture_filter = 1

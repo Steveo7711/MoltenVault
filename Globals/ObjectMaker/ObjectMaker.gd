@@ -35,4 +35,4 @@ func on_create_bullet(pos: Vector2, dir: Vector2, speed: float, ob_type: Constan
 	
 	var nb: Bullet = OBJECT_SCENES[ob_type].instantiate()
 	nb.setup(pos, dir, speed)
-	call_deferred("add_child", nb)
+	add_child(nb)  # add immediately instead of deferred so we can reference it

@@ -168,6 +168,8 @@ size = Vector2(12, 10)
 
 [node name="Frogy" unique_id=1881249055 instance=ExtResource("1_jkg1l")]
 script = ExtResource("2_vtu14")
+shoot_interval = 2.0
+bullet_speed = 150.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1538378777]
 shape = SubResource("CircleShape2D_tktty")
@@ -187,4 +189,7 @@ shape = SubResource("RectangleShape2D_vtu14")
 wait_time = 3.0
 one_shot = true
 
+[node name="ShootTimer" type="Timer" parent="." index="5" unique_id=1679370441]
+
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
