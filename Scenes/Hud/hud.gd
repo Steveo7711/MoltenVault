@@ -49,15 +49,14 @@ func on_player_hit(lives: int, shake: bool) -> void:
 		on_level_complete(false)
 
 func on_level_complete(complete: bool) -> void:
+	sound.stop()
 	color_rect.show()
-	
 	if complete:
 		vb_complete.show()
 		sound.stream = YOU_WIN
 	else:
 		sound.stream = GAME_OVER
 		vb_game_over.show()
-	
 	sound.play()
 	get_tree().paused = true
 	complete_timer.start()

@@ -325,7 +325,7 @@ label_settings = SubResource("LabelSettings_0u5uq")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=449166627]
 collision_layer = 2
-collision_mask = 28
+collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1414319264]
 position = Vector2(-7.1054274e-15, -1)

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://duaybwngl17g5"]
+
+[ext_resource type="PackedScene" uid="uid://c2oqm36g3y01n" path="res://Scenes/Bullets/base_bullet.tscn" id="1_nkeur"]
+[ext_resource type="Script" uid="uid://dyx5uc1pqckcs" path="res://Scenes/Bullets/BouncingBullet.gd" id="2_ckc3y"]
+[ext_resource type="Texture2D" uid="uid://do2vyejgbq06o" path="res://assests/bullets/bouncingBall.png" id="3_lmwt3"]
+[ext_resource type="Texture2D" uid="uid://digx8oqlqturk" path="res://assests/lavaparticle.png" id="4_h417c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lmwt3"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_olrrv"]
+offsets = PackedFloat32Array(0.19582506, 0.75049704, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.25944334, 0.25944334, 0.25944334, 1, 0, 0, 0, 1)
+
+[node name="BouncingBullet" unique_id=1595782987 instance=ExtResource("1_nkeur")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_ckc3y")
+max_bounces = 3
+
+[node name="Sprite2D" parent="." index="0" unique_id=1078588468]
+texture_filter = 1
+texture = ExtResource("3_lmwt3")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1826650696]
+shape = SubResource("CircleShape2D_lmwt3")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="3" unique_id=1403342185]
+amount = 5
+texture = ExtResource("4_h417c")
+lifetime = 0.2
+speed_scale = 0.2
+randomness = 0.36
+lifetime_randomness = 0.22
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 66.85
+gravity = Vector2(0, 800)
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(1, 0.8973333, 0.120000005, 1)
+color_initial_ramp = SubResource("Gradient_olrrv")

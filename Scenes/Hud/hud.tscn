@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://n8ga6gjs7d5c" path="res://assests/fonts/NovaMono.ttf" id="2_88iar"]
 [ext_resource type="Texture2D" uid="uid://deovifi82xb8c" path="res://assests/pickups/pixelHeart.png" id="3_r346g"]
 [ext_resource type="AudioStream" uid="uid://db3t4jx5vcorm" path="res://assests/sound/BGMusic.wav" id="4_m635s"]
+[ext_resource type="AudioStream" uid="uid://3yngcdk3cjxt" path="res://assests/sound/BGMusicLoop.tres" id="5_n088g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r346g"]
 font = ExtResource("2_88iar")
@@ -164,7 +165,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Sound" type="AudioStreamPlayer" parent="." unique_id=910136036]
-stream = ExtResource("4_m635s")
+stream = ExtResource("5_n088g")
 volume_db = -30.0
 pitch_scale = 1.78
 

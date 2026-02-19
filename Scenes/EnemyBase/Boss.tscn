@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cql5f7dunf2w7"]
+
+[ext_resource type="PackedScene" uid="uid://b0c8e1u3lfpje" path="res://Scenes/EnemyBase/EnemyBase.tscn" id="1_32vti"]
+[ext_resource type="Script" uid="uid://c4saibxkgawd8" path="res://Scenes/EnemyBase/Boss.gd" id="2_ec4lr"]
+[ext_resource type="PackedScene" uid="uid://dcffdh50qimaa" path="res://Scenes/HazardZone/HazardZone.tscn" id="3_247hh"]
+[ext_resource type="Texture2D" uid="uid://d2g1fskk270yv" path="res://assests/Enemy/Sprite-0001.png" id="3_xub41"]
+[ext_resource type="Texture2D" uid="uid://digx8oqlqturk" path="res://assests/lavaparticle.png" id="4_d28ny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xub41"]
+radius = 12.0
+height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d28ny"]
+atlas = ExtResource("3_xub41")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_247hh"]
+atlas = ExtResource("3_xub41")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rihx3"]
+atlas = ExtResource("3_xub41")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsxuh"]
+atlas = ExtResource("3_xub41")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ec4lr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d28ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_247hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rihx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsxuh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d28ny"]
+
+[sub_resource type="Gradient" id="Gradient_247hh"]
+offsets = PackedFloat32Array(0.19582506, 0.75049704, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.25944334, 0.25944334, 0.25944334, 1, 0, 0, 0, 1)
+
+[node name="Boss" unique_id=1881249055 instance=ExtResource("1_32vti")]
+script = ExtResource("2_ec4lr")
+max_hp = 20
+attack_interval = 2.5
+bullet_speed = 120.0
+burst_count = 5
+burst_delay = 0.15
+spiral_count = 12
+spiral_rings = 4
+spiral_ring_delay = 0.2
+bounce_count = 1
+move_speed = 60.0
+jump_velocity = -320.0
+jump_horizontal_force = 120.0
+jump_height_threshold = 40.0
+jump_timer_min = 2.0
+jump_timer_max = 4.0
+hazard_scene = ExtResource("3_247hh")
+bullet_scale = 1.0
+hazard_drop_interval = 2.0
+hazard_size = 1.5
+hazard_height = 0.4
+metadata/_edit_vertical_guides_ = [-183.0]
+metadata/_edit_horizontal_guides_ = [31.0]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1538378777]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_xub41")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=2125008738]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ec4lr")
+animation = &"idle"
+frame_progress = 0.29032707
+
+[node name="HitBox" parent="." index="3" unique_id=1088888907]
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=1572808315]
+position = Vector2(0, 3.9999998)
+scale = Vector2(1.3599969, 2.0399995)
+shape = SubResource("CapsuleShape2D_d28ny")
+
+[node name="AttackTimer" type="Timer" parent="." index="4" unique_id=226548058]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="5" unique_id=638596932]
+texture_filter = 1
+position = Vector2(0, 26)
+scale = Vector2(1.5200007, 0.31982523)
+amount = 15
+texture = ExtResource("4_d28ny")
+lifetime = 0.2
+speed_scale = 0.2
+randomness = 0.36
+lifetime_randomness = 0.22
+emission_shape = 1
+emission_sphere_radius = 13.01
+spread = 66.85
+gravity = Vector2(0, 800)
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+color = Color(1, 0.8973333, 0.120000005, 1)
+color_initial_ramp = SubResource("Gradient_247hh")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,3 +1,198 @@
-[gd_scene format=3 uid="uid://cuw8yp2qq78tm"]
+[gd_scene format=3 uid="uid://d1kb0nvughqlr"]
 
-[node name="Main" type="Node2D" unique_id=1377606822]
+[ext_resource type="FontFile" uid="uid://n8ga6gjs7d5c" path="res://assests/fonts/NovaMono.ttf" id="1_p8rbg"]
+[ext_resource type="Script" uid="uid://bo0vuikkvxccc" path="res://Scenes/Main/Main.gd" id="1_qtv3y"]
+[ext_resource type="Texture2D" uid="uid://dwm8wfudw1xob" path="res://assests/buttons/PlayButton.png" id="2_i3fi7"]
+[ext_resource type="Texture2D" uid="uid://cuov2ya2iw3pa" path="res://assests/MainBGFlames.png" id="3_4vhfm"]
+[ext_resource type="Texture2D" uid="uid://bys0416281c07" path="res://assests/buttons/QuitButton.png" id="3_o8wgc"]
+[ext_resource type="Texture2D" uid="uid://c6iyg76fbtkvn" path="res://assests/buttons/PlayButtonClicked.png" id="4_5s61s"]
+[ext_resource type="Texture2D" uid="uid://digihs7niske4" path="res://assests/buttons/PlayButtonHover.png" id="5_7npjy"]
+[ext_resource type="Texture2D" uid="uid://bvwhfo14qky47" path="res://assests/buttons/QuitButtonClicked.png" id="7_4vhfm"]
+[ext_resource type="Texture2D" uid="uid://bv35vd2cwm4kp" path="res://assests/buttons/QuitButtonHover.png" id="8_dvlhv"]
+[ext_resource type="PackedScene" uid="uid://d2vx1fom05rmr" path="res://Scenes/ParrallexBg/ParrallexBgMainMenu.tscn" id="9_7npjy"]
+
+[sub_resource type="Animation" id="Animation_4vhfm"]
+resource_name = "FlameColorChange"
+length = 3.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_i3fi7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmk6n"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1.4640859),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o8wgc"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.366038, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3fi7"]
+_data = {
+&"FlameColorChange": SubResource("Animation_4vhfm"),
+&"RESET": SubResource("Animation_i3fi7"),
+&"fade_in": SubResource("Animation_cmk6n"),
+&"fade_out": SubResource("Animation_o8wgc")
+}
+
+[sub_resource type="Gradient" id="Gradient_4vhfm"]
+offsets = PackedFloat32Array(0, 0.7962227, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.028827012, 0.028827012, 0.028827012, 1, 0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtv3y"]
+line_spacing = 6.0
+font = ExtResource("1_p8rbg")
+font_size = 60
+font_color = Color(0.8, 0.19200002, 0.19200002, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0.42, 0.42, 0.42, 1)
+
+[node name="Main" type="Control" unique_id=608106155]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_qtv3y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=924447571]
+libraries/ = SubResource("AnimationLibrary_i3fi7")
+autoplay = &"FlameColorChange"
+
+[node name="ParrallexBGMainMenu" parent="." unique_id=1193156571 instance=ExtResource("9_7npjy")]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=405941229]
+modulate = Color(0.8, 0.8, 0.8, 1)
+texture_filter = 1
+layout_mode = 0
+offset_top = 95.0
+offset_right = 640.0
+offset_bottom = 359.0
+mouse_filter = 2
+texture = ExtResource("3_4vhfm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1627930794]
+position = Vector2(320, 343)
+amount = 100
+randomness = 0.7
+lifetime_randomness = 0.56
+emission_shape = 3
+emission_rect_extents = Vector2(325, 10)
+spread = 71.74
+gravity = Vector2(0, -500)
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(0.85490197, 0.3019608, 0.047058824, 1)
+color_ramp = SubResource("Gradient_4vhfm")
+
+[node name="VB" type="VBoxContainer" parent="." unique_id=1175232503]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="VB" unique_id=1985337568]
+layout_mode = 2
+theme_override_constants/line_spacing = 10
+text = "Molten Path"
+label_settings = SubResource("LabelSettings_qtv3y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBButtons" type="VBoxContainer" parent="." unique_id=1485550977]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -51.0
+offset_right = 5.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="TextureButton" parent="VBButtons" unique_id=1312664297]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("2_i3fi7")
+texture_pressed = ExtResource("4_5s61s")
+texture_hover = ExtResource("5_7npjy")
+stretch_mode = 3
+
+[node name="QuitButton" type="TextureButton" parent="VBButtons" unique_id=358116442]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_o8wgc")
+texture_pressed = ExtResource("7_4vhfm")
+texture_hover = ExtResource("8_dvlhv")
+stretch_mode = 3
+
+[node name="ScoresContainer" type="VBoxContainer" parent="." unique_id=1954737030]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1439851838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

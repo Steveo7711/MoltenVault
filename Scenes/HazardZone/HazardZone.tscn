@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dcffdh50qimaa"]
+
+[ext_resource type="Script" uid="uid://dssofm55ihpfr" path="res://Scenes/HazardZone/HazardZone.gd" id="1_jn7t8"]
+[ext_resource type="Texture2D" uid="uid://dl1ccagr4e70n" path="res://assests/bullets/HazardPool.png" id="2_7uwu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kbwr"]
+size = Vector2(25.938, 2)
+
+[node name="HazardZone" type="Area2D" unique_id=479553759]
+scale = Vector2(-0.23151076, 0.08318839)
+script = ExtResource("1_jn7t8")
+hazard_scale = 0.5
+right_wall_rotation = 270.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1088045647]
+shape = SubResource("RectangleShape2D_8kbwr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=591044815]
+texture_filter = 1
+position = Vector2(0, -9.536743e-07)
+scale = Vector2(0.90383804, 1.908931)
+texture = ExtResource("2_7uwu7")
+offset = Vector2(0, 5)

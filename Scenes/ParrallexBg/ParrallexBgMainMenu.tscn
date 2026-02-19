@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d2vx1fom05rmr"]
+
+[ext_resource type="Texture2D" uid="uid://dutwdilv686d6" path="res://assests/terrain/PBGColor.png" id="1_obhmn"]
+[ext_resource type="Script" uid="uid://8qnfh0r3o6pv" path="res://Scenes/ParrallexBg/PLSmokeClouds.gd" id="2_n5rw5"]
+[ext_resource type="Texture2D" uid="uid://b3lmk3yawyu8v" path="res://assests/terrain/smokecloudsPBG.png" id="3_mo27e"]
+
+[node name="ParrallexBGMainMenu" type="Node2D" unique_id=1193156571]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1764026175]
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground" unique_id=38660748]
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6" unique_id=1908804743]
+texture_filter = 1
+texture = ExtResource("1_obhmn")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=843479172]
+motion_scale = Vector2(0, 1)
+motion_mirroring = Vector2(640, 0)
+script = ExtResource("2_n5rw5")
+CLOUD_SPEED = -5
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1288704052]
+texture_filter = 1
+texture = ExtResource("3_mo27e")
+centered = false
