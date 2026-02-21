@@ -213,5 +213,5 @@ color = Color(0, 0, 0, 0)
 stream = ExtResource("11_dvlhv")
 autoplay = true
 
-[connection signal="pressed" from="VBButtons/ArenaButton" to="." method="_on_arena_pressed"]
+[connection signal="pressed" from="VBButtons/ArenaButton" to="." method="_on_arena_button_pressed"]
 [connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

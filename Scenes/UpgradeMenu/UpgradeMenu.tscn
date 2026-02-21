@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://efjognnvcf41"]
+
+[ext_resource type="Script" uid="uid://bdhmwogkb80qt" path="res://Scenes/UpgradeMenu/UpgradeMenu.gd" id="1_ht6u3"]
+[ext_resource type="Theme" uid="uid://blos4celfsuls" path="res://assests/Resources/upgrade_theme.tres" id="1_j3qw8"]
+[ext_resource type="FontFile" uid="uid://n8ga6gjs7d5c" path="res://assests/fonts/NovaMono.ttf" id="2_xpfs1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j3qw8"]
+font = ExtResource("2_xpfs1")
+font_size = 24
+
+[node name="UpgradeMenu" type="Control" unique_id=1360098307]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_j3qw8")
+script = ExtResource("1_ht6u3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1820019289]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1017022910]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1121903636]
+layout_mode = 2
+text = "Pick one to continue"
+label_settings = SubResource("LabelSettings_j3qw8")
+horizontal_alignment = 1
+
+[node name="MoreEnemisButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1654112746]
+layout_mode = 2
+theme = ExtResource("1_j3qw8")
+text = "More Enemies"
+
+[node name="MoreHealthButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=2084744191]
+layout_mode = 2
+theme = ExtResource("1_j3qw8")
+text = "Enemies have more HP"
+
+[node name="MoreDamageButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=310422740]
+layout_mode = 2
+theme = ExtResource("1_j3qw8")
+text = "Enemies do more dmg"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MoreEnemisButton" to="." method="_on_more_enemies_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MoreHealthButton" to="." method="_on_more_health_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MoreDamageButton" to="." method="_on_more_damage_pressed"]

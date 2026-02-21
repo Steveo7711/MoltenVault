@@ -2,13 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://cfim0lyw244c1" path="res://assests/terrain/caveTerrain.png" id="1_5ufo3"]
 [ext_resource type="PackedScene" uid="uid://b42eume473t3p" path="res://Scenes/ParrallexBg/ParrallexBg.tscn" id="1_78m1b"]
+[ext_resource type="Script" uid="uid://d2du1tv4up7jq" path="res://Scenes/LevelBase/LevelBase.gd" id="1_hcoko"]
 [ext_resource type="PackedScene" uid="uid://c6deeahhdrv3l" path="res://Scenes/Hud/hud.tscn" id="1_txgif"]
 [ext_resource type="PackedScene" uid="uid://pfmxw18stl43" path="res://Scenes/Player/player.tscn" id="2_bgw71"]
 [ext_resource type="PackedScene" uid="uid://d3vpogoq1jb8e" path="res://Scenes/Pickup/pickup.tscn" id="5_ooqsx"]
 [ext_resource type="FontFile" uid="uid://n8ga6gjs7d5c" path="res://assests/fonts/NovaMono.ttf" id="6_txgif"]
 [ext_resource type="PackedScene" uid="uid://csy0p26houdgk" path="res://Scenes/EnemyBase/Frogy.tscn" id="7_txgif"]
 [ext_resource type="PackedScene" uid="uid://b5sig43k6yhtx" path="res://Scenes/LavaPool/Lava.tscn" id="8_dufl6"]
-[ext_resource type="PackedScene" uid="uid://cql5f7dunf2w7" path="res://Scenes/EnemyBase/Boss.tscn" id="9_dufl6"]
+[ext_resource type="PackedScene" uid="uid://c7wv57t1nrliy" path="res://Scenes/Boss/boss.tscn" id="10_hcoko"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgw71"]
 resource_name = "CaveTerrain"
@@ -201,6 +202,7 @@ font = ExtResource("6_txgif")
 font_size = 10
 
 [node name="LevelBase" type="Node2D" unique_id=1234525570]
+script = ExtResource("1_hcoko")
 
 [node name="ParrallexBG" parent="." unique_id=1193156571 instance=ExtResource("1_78m1b")]
 
@@ -321,5 +323,5 @@ scale = Vector2(0.8216413, 1.2699904)
 position = Vector2(1444.0001, 221)
 scale = Vector2(-0.5383538, 1.3639696)
 
-[node name="Boss" parent="." unique_id=762387854 instance=ExtResource("9_dufl6")]
-position = Vector2(1769, 282)
+[node name="Boss" parent="." unique_id=711259068 instance=ExtResource("10_hcoko")]
+position = Vector2(1766, 305)

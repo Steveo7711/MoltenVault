@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://pfmxw18stl43" path="res://Scenes/Player/player.tscn" id="3_ner4r"]
 [ext_resource type="Script" uid="uid://btgayufitecup" path="res://Classes/WaveManager.gd" id="4_csujq"]
 [ext_resource type="PackedScene" uid="uid://csy0p26houdgk" path="res://Scenes/EnemyBase/Frogy.tscn" id="5_ner4r"]
-[ext_resource type="PackedScene" uid="uid://c7wv57t1nrliy" path="res://Scenes/Boss/boss.tscn" id="8_bga1v"]
+[ext_resource type="PackedScene" uid="uid://cql5f7dunf2w7" path="res://Scenes/EnemyBase/Boss.tscn" id="6_csujq"]
 [ext_resource type="PackedScene" uid="uid://c6deeahhdrv3l" path="res://Scenes/Hud/hud.tscn" id="8_wcn2d"]
-[ext_resource type="PackedScene" uid="uid://efjognnvcf41" path="res://Scenes/UpgradeMenu/UpgradeMenu.tscn" id="9_bga1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcn2d"]
 resource_name = "CaveTerrain"
@@ -218,8 +217,8 @@ tile_set = SubResource("TileSet_bga1v")
 [node name="WaveManager" type="Node" parent="." unique_id=641460171]
 script = ExtResource("4_csujq")
 frog_scene = ExtResource("5_ner4r")
-boss_scene = ExtResource("8_bga1v")
-upgrade_menu_scene = ExtResource("9_bga1v")
+boss_scene = ExtResource("6_csujq")
+kills_to_boss = null
 
 [node name="SpawnPoints" type="Node2D" parent="." unique_id=1934394674]
 

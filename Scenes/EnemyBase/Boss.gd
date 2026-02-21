@@ -35,6 +35,7 @@ var _move_change_interval: float = 2.0
 var _jump_timer: float = 0.0
 var _next_jump_time: float = 0.0
 var _hazard_drop_timer: float = 0.0
+var _active_bullets: Array = []
 
 @onready var attack_timer: Timer = $AttackTimer
 @onready var visible_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
@@ -165,6 +166,7 @@ func _do_aimed_burst() -> void:
 		nb.scale = Vector2(bullet_scale, bullet_scale)
 		nb.setup(global_position, dir, bullet_speed)
 		get_tree().current_scene.add_child(nb)
+		_active_bullets.append(nb)
 		await get_tree().create_timer(burst_delay).timeout
 
 func _do_spiral() -> void:
@@ -180,6 +182,7 @@ func _do_spiral() -> void:
 			nb.scale = Vector2(bullet_scale, bullet_scale)
 			nb.setup(global_position, dir, bullet_speed * 0.7)
 			get_tree().current_scene.add_child(nb)
+			_active_bullets.append(nb)
 		await get_tree().create_timer(spiral_ring_delay).timeout
 
 func _do_bouncing() -> void:
@@ -197,6 +200,7 @@ func _do_bouncing() -> void:
 		nb.scale = Vector2(bullet_scale, bullet_scale)
 		nb.setup(global_position, dir, bullet_speed)
 		get_tree().current_scene.add_child(nb)
+		_active_bullets.append(nb)
 		await get_tree().create_timer(0.1).timeout
 		
 
@@ -217,8 +221,14 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 func die() -> void:
 	set_physics_process(false)
 	attack_timer.stop()
+	
+	# Clean up any lingering bullets
+	for b in _active_bullets:
+		if is_instance_valid(b):
+			b.queue_free()
+	_active_bullets.clear()
+	
 	animated_sprite_2d.play("die")
 	await animated_sprite_2d.animation_finished
 	SignalHub.emit_on_boss_killed()
-	hide()  # hide before queue_free
 	super.die()

@@ -3,18 +3,28 @@ class_name Main
 
 @onready var play_button: TextureButton = $VBButtons/PlayButton
 @onready var quit_button: TextureButton = $VBButtons/QuitButton
+@onready var arena_button: TextureButton = $VBButtons/ArenaButton
 @onready var scores_container: VBoxContainer = $ScoresContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sound: AudioStreamPlayer = $Sound
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
+
 func _ready() -> void:
 	play_button.pressed.connect(_on_play_pressed)
+	arena_button.pressed.connect(_on_arena_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	_populate_scores()
 	animation_player.play("fade_in")
 	sound.play()
 	particles.emitting = true
+	
+
+func _on_arena_pressed() -> void:
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	GameManager.set_current_level_arena()
+	get_tree().change_scene_to_packed(GameManager.ARENA)
 
 func _populate_scores() -> void:
 	for child in scores_container.get_children():
