@@ -2,6 +2,9 @@ extends Node
 
 const MAIN = preload("res://Scenes/Main/Main.tscn")
 const LEVEL_BASE = preload("res://Scenes/LevelBase/LevelBase.tscn")
+const ARENA = preload("res://Scenes/Arena/Arena.tscn")
+
+
 
 const SCORES_PATH = "user://high_scores.tres"
 
@@ -18,9 +21,29 @@ var cached_score: int:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_Q):
-		get_tree().quit()
+		load_main()  
 
+var current_level: String = "LevelBase"  # track current level
 
+func load_next_level() -> void:
+	current_level = "LevelBase"
+	get_tree().change_scene_to_packed(LEVEL_BASE)
+
+func restart_level() -> void:
+	cached_score = 0
+	get_tree().paused = false
+	match current_level:
+		"LevelBase":
+			get_tree().change_scene_to_packed(LEVEL_BASE)
+		"Arena":
+			get_tree().change_scene_to_packed(ARENA)
+
+func restart_arena() -> void:
+	current_level = "Arena"
+	cached_score = 0
+	get_tree().paused = false
+	get_tree().change_scene_to_packed(ARENA)
+	
 func _ready() -> void:
 	load_high_scores()
 
@@ -32,10 +55,6 @@ func _exit_tree():
 func load_main():
 	cached_score = 0
 	get_tree().change_scene_to_packed(MAIN)
-
-
-func load_next_level():
-	get_tree().change_scene_to_packed(LEVEL_BASE)
 
 
 func load_high_scores():		

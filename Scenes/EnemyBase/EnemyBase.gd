@@ -4,7 +4,7 @@ extends CharacterBody2D
 class_name EnemyBase
 
 
-const FALL_OFF_Y: int = 200.0
+const FALL_OFF_Y: float = 10000.0
 
 @export var points: int = 1
 @export var speed: float = 30.0
@@ -31,12 +31,8 @@ func flip_me() -> void:
 	animated_sprite_2d.flip_h = _player_ref.global_position.x > animated_sprite_2d.global_position.x
 
 func die() -> void:
-	SignalHub.emit_on_create_object(
-		global_position, Constants.ObjectType.PICKUP
-	)
-	#SignalHub.emit_on_create_object(
-		#global_position, Constants.ObjectType.EXPLOSION
-	#)
+	SignalHub.emit_on_enemy_killed()  # add this line
+	SignalHub.emit_on_create_object(global_position, Constants.ObjectType.PICKUP)
 	SignalHub.on_scored.emit(points)
 	set_physics_process(false)
 	queue_free()

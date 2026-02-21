@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bvwhfo14qky47" path="res://assests/buttons/QuitButtonClicked.png" id="7_4vhfm"]
 [ext_resource type="Texture2D" uid="uid://bv35vd2cwm4kp" path="res://assests/buttons/QuitButtonHover.png" id="8_dvlhv"]
 [ext_resource type="PackedScene" uid="uid://d2vx1fom05rmr" path="res://Scenes/ParrallexBg/ParrallexBgMainMenu.tscn" id="9_7npjy"]
+[ext_resource type="AudioStream" uid="uid://dg3usjvecn4qy" path="res://assests/sound/BGMusicMainScreen.wav" id="11_dvlhv"]
 
 [sub_resource type="Animation" id="Animation_4vhfm"]
 resource_name = "FlameColorChange"
@@ -196,3 +197,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=865130314]
+stream = ExtResource("11_dvlhv")
+autoplay = true
+
+[connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

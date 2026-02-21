@@ -7,7 +7,7 @@ const DAMAGE = preload("res://assests/sound/damage.wav")
 const WALKING = preload("res://assests/sound/walkingsound.wav")
 
 @export var fell_off_y: float = 100.0
-@export var lives: int = 5
+@export var lives: int = 4
 
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -30,6 +30,7 @@ var _invincible: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	call_deferred("late_init")
 
 
@@ -145,8 +146,10 @@ func appy_hurt_jump() -> void:
 	play_effect(DAMAGE)
 
 func add_hearts(hearts: int) -> void:
-	if lives == 5:
-		lives += hearts
+	print("add_hearts called, lives before: ", lives)
+	lives = min(lives + hearts, 5)
+	print("lives after: ", lives)
+	SignalHub.emit_on_player_hit(lives, false)
 
 func apply_hit() -> void:
 	if ObjectMaker._is_pickup == Constants.ObjectType.PICKUP:
@@ -164,6 +167,8 @@ func apply_hit() -> void:
 	appy_hurt_jump()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
+	if area is Pickup:
+		return
 	call_deferred("apply_hit")
 
 

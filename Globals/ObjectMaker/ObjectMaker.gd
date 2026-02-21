@@ -26,10 +26,9 @@ func _enter_tree() -> void:
 func on_create_object(pos: Vector2, ob_type: Constants.ObjectType) -> void:
 	if OBJECT_SCENES.has(ob_type) == false:
 		return
-	
 	var newobj: Node2D = OBJECT_SCENES[ob_type].instantiate()
 	newobj.global_position = pos
-	call_deferred("add_child", newobj)
+	get_tree().current_scene.add_child(newobj)  # change from call_deferred add_child
 
 func on_create_bullet(pos: Vector2, dir: Vector2, speed: float, ob_type: Constants.ObjectType) -> void:
 	if OBJECT_SCENES.has(ob_type) == false:

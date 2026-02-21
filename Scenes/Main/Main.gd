@@ -5,13 +5,16 @@ class_name Main
 @onready var quit_button: TextureButton = $VBButtons/QuitButton
 @onready var scores_container: VBoxContainer = $ScoresContainer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound: AudioStreamPlayer = $Sound
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 func _ready() -> void:
 	play_button.pressed.connect(_on_play_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	_populate_scores()
-	# Fade in on load
 	animation_player.play("fade_in")
+	sound.play()
+	particles.emitting = true
 
 func _populate_scores() -> void:
 	for child in scores_container.get_children():
@@ -40,3 +43,7 @@ func _on_quit_pressed() -> void:
 	animation_player.play("fade_out")
 	await animation_player.animation_finished
 	get_tree().quit()
+
+
+func _on_sound_finished() -> void:
+	sound.play()

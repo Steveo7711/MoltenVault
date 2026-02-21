@@ -47,11 +47,11 @@ color = Color(1, 0.8973333, 0.120000005, 1)
 color_initial_ramp = SubResource("Gradient_rleqy")
 
 [node name="lavaRay" type="RayCast2D" parent="Line2D" unique_id=856392267]
-visible = false
+position = Vector2(0, 22)
 target_position = Vector2(0, 500)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=141229458]
-collision_layer = 16
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1338659754]
 position = Vector2(0, 10)

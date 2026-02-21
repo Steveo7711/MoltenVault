@@ -2,7 +2,7 @@ extends Control
 
 class_name Hud
 
-var lives
+var lives: int = 4
 
 const GAME_OVER = preload("res://assests/sound/GameOver.wav")
 const YOU_WIN = preload("res://assests/sound/LevelComplete.wav")
@@ -15,25 +15,28 @@ const YOU_WIN = preload("res://assests/sound/LevelComplete.wav")
 @onready var vb_complete: VBoxContainer = $ColorRect/VBComplete
 @onready var complete_timer: Timer = $CompleteTimer
 @onready var sound: AudioStreamPlayer = $Sound
-
+@onready var restart_label: Label = $ColorRect/VBGameOver/RestartLabel
 
 var _score: int = 0
 var _hearts: Array 
 var _can_continue: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("quit") == true:
+	if event.is_action_pressed("quit"):
 		GameManager.load_main()
-	
-	if _can_continue and event.is_action_pressed("shoot"):
-		GameManager.load_main()
+	if _can_continue and event.is_action_pressed("jump"):
+		GameManager.restart_level()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_hearts = hb_hearts.get_children()
+	print("Hearts found: ", _hearts.size())  # confirm this prints 5
 	_score = GameManager.cached_score
 	on_scored(0)
+	on_player_hit(lives, false)  # initialize hearts to correct state on start
 
+func late_init() -> void:
+	SignalHub.emit_on_player_hit(lives, false)  # this drives the initial heart display
 
 func _enter_tree() -> void:
 	SignalHub.on_scored.connect(on_scored)
@@ -51,6 +54,7 @@ func on_player_hit(lives: int, shake: bool) -> void:
 func on_level_complete(complete: bool) -> void:
 	sound.stop()
 	color_rect.show()
+	restart_label.hide()  # hide it initially
 	if complete:
 		vb_complete.show()
 		sound.stream = YOU_WIN
@@ -71,6 +75,7 @@ func on_scored(points: int) -> void:
 
 func _on_complete_timer_timeout() -> void:
 	_can_continue = true
+	restart_label.show()  # show it after the timer fires
 
 
 func _on_sound_finished() -> void:

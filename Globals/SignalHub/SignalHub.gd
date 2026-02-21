@@ -13,6 +13,10 @@ signal on_create_object(pos: Vector2, ob_type: Constants.ObjectType)
 signal on_scored(points: int)
 signal on_level_complete(complete: bool)
 
+signal on_enemy_killed
+
+func emit_on_enemy_killed() -> void:
+	on_enemy_killed.emit()
 
 func emit_on_level_complete(complete: bool) -> void:
 	on_level_complete.emit(complete)

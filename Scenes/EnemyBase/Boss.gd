@@ -37,11 +37,27 @@ var _next_jump_time: float = 0.0
 var _hazard_drop_timer: float = 0.0
 
 @onready var attack_timer: Timer = $AttackTimer
-
+@onready var visible_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 func _ready() -> void:
 	_hp = max_hp
+	set_physics_process(false)
+	attack_timer.stop()
+	animated_sprite_2d.play("idle")  # just idle while waiting off screen
+	
+	# Wait until visible
+	if not visible_notifier.is_on_screen():
+		await visible_notifier.screen_entered
+	
+	# Now do spawn animation
+	animated_sprite_2d.play("spawn")
+	await animated_sprite_2d.animation_finished
+	animated_sprite_2d.play("idle")
+	
+	# Now activate
+	set_physics_process(true)
 	attack_timer.wait_time = attack_interval
+	attack_timer.connect("timeout", _on_attack_timer_timeout)
 	attack_timer.start()
 	_next_jump_time = randf_range(jump_timer_min, jump_timer_max)
 
@@ -140,6 +156,8 @@ func _do_aimed_burst() -> void:
 	if _player_ref == null:
 		return
 	for i in range(burst_count):
+		if not is_instance_valid(self):
+			return
 		var dir: Vector2 = (_player_ref.global_position - global_position).normalized()
 		var nb: BouncingBullet = preload("res://Scenes/Bullets/BouncingBullet.tscn").instantiate()
 		nb.max_bounces = 0
@@ -151,6 +169,8 @@ func _do_aimed_burst() -> void:
 
 func _do_spiral() -> void:
 	for ring in range(spiral_rings):
+		if not is_instance_valid(self):
+			return
 		for i in range(spiral_count):
 			var angle: float = (TAU / spiral_count) * i + (TAU / spiral_count / spiral_rings) * ring
 			var dir: Vector2 = Vector2(cos(angle), sin(angle))
@@ -162,11 +182,12 @@ func _do_spiral() -> void:
 			get_tree().current_scene.add_child(nb)
 		await get_tree().create_timer(spiral_ring_delay).timeout
 
-
 func _do_bouncing() -> void:
 	if _player_ref == null:
 		return
 	for i in range(bounce_count):
+		if not is_instance_valid(self):
+			return
 		var base_dir: Vector2 = (_player_ref.global_position - global_position).normalized()
 		var spread_angle: float = deg_to_rad(randf_range(-30.0, 30.0))
 		var dir: Vector2 = base_dir.rotated(spread_angle)
@@ -194,5 +215,10 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		take_damage(1)
 
 func die() -> void:
+	set_physics_process(false)
+	attack_timer.stop()
+	animated_sprite_2d.play("die")
+	await animated_sprite_2d.animation_finished
 	SignalHub.emit_on_boss_killed()
+	hide()  # hide before queue_free
 	super.die()

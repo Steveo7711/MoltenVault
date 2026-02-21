@@ -128,11 +128,12 @@ label_settings = SubResource("LabelSettings_n088g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="ColorRect/VBGameOver" unique_id=49388973]
+[node name="RestartLabel" type="Label" parent="ColorRect/VBGameOver" unique_id=49388973]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Press Space to play again!"
+text = "Press Space to play again!
+Press Q to go to Main Menu!"
 label_settings = SubResource("LabelSettings_88iar")
 horizontal_alignment = 1
 vertical_alignment = 1

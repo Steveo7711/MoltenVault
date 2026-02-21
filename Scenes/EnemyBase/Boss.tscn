@@ -5,10 +5,76 @@
 [ext_resource type="PackedScene" uid="uid://dcffdh50qimaa" path="res://Scenes/HazardZone/HazardZone.tscn" id="3_247hh"]
 [ext_resource type="Texture2D" uid="uid://d2g1fskk270yv" path="res://assests/Enemy/Sprite-0001.png" id="3_xub41"]
 [ext_resource type="Texture2D" uid="uid://digx8oqlqturk" path="res://assests/lavaparticle.png" id="4_d28ny"]
+[ext_resource type="Texture2D" uid="uid://vn24qhmo2kxj" path="res://assests/Enemy/LavaBossspriteFull.png" id="4_vsxuh"]
+[ext_resource type="Texture2D" uid="uid://bjm3lbhpiylgy" path="res://assests/Enemy/LavaBosssprite.png" id="5_rihx3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xub41"]
 radius = 12.0
 height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk05f"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74e6p"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqfbj"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktnyl"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qc5o4"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jg4w"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1024, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg2yl"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1088, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8v1o"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1152, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyg6n"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1216, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1jnk"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1280, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ceix"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1344, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f51t"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1408, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btofe"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1472, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3h0e"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1536, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0rrf"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1600, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr5sp"]
+atlas = ExtResource("4_vsxuh")
+region = Rect2(1664, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d28ny"]
 atlas = ExtResource("3_xub41")
@@ -26,8 +92,89 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("3_xub41")
 region = Rect2(192, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_do1gp"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5y5h"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egjiw"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe2qe"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dqhv"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okffi"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2e3s"]
+atlas = ExtResource("5_rihx3")
+region = Rect2(704, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ec4lr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk05f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74e6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqfbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktnyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qc5o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jg4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg2yl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8v1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyg6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1jnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ceix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f51t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btofe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3h0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0rrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr5sp")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d28ny")
@@ -44,6 +191,32 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do1gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5y5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egjiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fe2qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dqhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okffi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2e3s")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 4.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d28ny"]
@@ -54,16 +227,16 @@ colors = PackedColorArray(1, 1, 1, 1, 0.25944334, 0.25944334, 0.25944334, 1, 0, 
 
 [node name="Boss" unique_id=1881249055 instance=ExtResource("1_32vti")]
 script = ExtResource("2_ec4lr")
-max_hp = 20
+max_hp = 5
 attack_interval = 2.5
 bullet_speed = 120.0
-burst_count = 5
+burst_count = 4
 burst_delay = 0.15
 spiral_count = 12
 spiral_rings = 4
 spiral_ring_delay = 0.2
-bounce_count = 1
-move_speed = 60.0
+bounce_count = 4
+move_speed = 40.0
 jump_velocity = -320.0
 jump_horizontal_force = 120.0
 jump_height_threshold = 40.0
@@ -85,7 +258,6 @@ shape = SubResource("CapsuleShape2D_xub41")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ec4lr")
 animation = &"idle"
-frame_progress = 0.29032707
 
 [node name="HitBox" parent="." index="3" unique_id=1088888907]
 collision_mask = 3

@@ -4,7 +4,7 @@
 
 [node name="Crystal" unique_id=1690635517 instance=ExtResource("1_xvsxy")]
 
-[node name="Anim" parent="." index="0" unique_id=1732043154]
+[node name="Anim" parent="." index="1" unique_id=1732043154]
 autoplay = "crystal1"
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="4" unique_id=1081897336]

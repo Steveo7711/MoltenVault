@@ -20,9 +20,8 @@ func _ready() -> void:
 	animated_sprite_2d.frame_changed.connect(_on_frame_changed)
 
 func shoot() -> void:
-	if _player_ref == null:
+	if _player_ref == null or _seen_player == false:
 		return
-	# Play attack animation, bullet spawns when frame 3 hits
 	animated_sprite_2d.play("attack")
 	
 func _on_frame_changed() -> void:

@@ -2,7 +2,7 @@ extends Area2D
 
 class_name Bullet
 
-var _direction: Vector2 = Vector2(50, -50)
+var _direction: Vector2 = Vector2(65, -65)
 var bullet_owner: String = "player"  # or "enemy"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
