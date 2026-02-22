@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Molten Path v1"
-run/main_scene="uid://bi5wc1kxhqseu"
+run/main_scene="uid://d1kb0nvughqlr"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://b8wwvooqttwl"
 
@@ -25,6 +25,7 @@ ObjectMaker="*uid://ct8x3i5idakrt"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/stretch/mode="viewport"
 
 [editor]

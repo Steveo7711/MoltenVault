@@ -6,7 +6,7 @@ var lives: int = 4
 
 const GAME_OVER = preload("res://assests/sound/GameOver.wav")
 const YOU_WIN = preload("res://assests/sound/LevelComplete.wav")
-#const BG_MUSIC = preload("res://assests/sound/BGMusic.wav")
+
 
 @onready var score_label: Label = $MarginContainer/ScoreLabel
 @onready var hb_hearts: HBoxContainer = $MarginContainer/HBHearts
@@ -16,6 +16,7 @@ const YOU_WIN = preload("res://assests/sound/LevelComplete.wav")
 @onready var complete_timer: Timer = $CompleteTimer
 @onready var sound: AudioStreamPlayer = $Sound
 @onready var restart_label: Label = $ColorRect/VBGameOver/RestartLabel
+@onready var level_complete_label: Label = $ColorRect/VBComplete/RestartLabel2
 
 var _score: int = 0
 var _hearts: Array 
@@ -54,7 +55,8 @@ func on_player_hit(lives: int, shake: bool) -> void:
 func on_level_complete(complete: bool) -> void:
 	sound.stop()
 	color_rect.show()
-	restart_label.hide()  # hide it initially
+	restart_label.hide()
+	level_complete_label.hide()  # add this
 	if complete:
 		vb_complete.show()
 		sound.stream = YOU_WIN
@@ -76,6 +78,7 @@ func on_scored(points: int) -> void:
 func _on_complete_timer_timeout() -> void:
 	_can_continue = true
 	restart_label.show()  # show it after the timer fires
+	level_complete_label.show()
 
 
 func _on_sound_finished() -> void:

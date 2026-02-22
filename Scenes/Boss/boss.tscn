@@ -7,10 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://digx8oqlqturk" path="res://assests/lavaparticle.png" id="4_d28ny"]
 [ext_resource type="Texture2D" uid="uid://vn24qhmo2kxj" path="res://assests/Enemy/LavaBossspriteFull.png" id="4_vsxuh"]
 [ext_resource type="Texture2D" uid="uid://bjm3lbhpiylgy" path="res://assests/Enemy/LavaBosssprite.png" id="5_rihx3"]
+[ext_resource type="AudioStream" uid="uid://b50n7vvkcj7m5" path="res://assests/sound/BossSpawn.mp3" id="8_twko3"]
+[ext_resource type="AudioStream" uid="uid://1ghxqrphhube" path="res://assests/sound/BossDie.wav" id="9_1gdmr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xub41"]
-radius = 12.0
-height = 48.0
+radius = 11.68366
+height = 37.06862
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rk05f"]
 atlas = ExtResource("4_vsxuh")
@@ -230,12 +232,12 @@ script = ExtResource("2_ec4lr")
 max_hp = 5
 attack_interval = 2.5
 bullet_speed = 120.0
-burst_count = 4
+burst_count = 3
 burst_delay = 0.15
-spiral_count = 12
+spiral_count = 8
 spiral_rings = 4
 spiral_ring_delay = 0.2
-bounce_count = 4
+bounce_count = 5
 move_speed = 40.0
 jump_velocity = -320.0
 jump_horizontal_force = 120.0
@@ -247,11 +249,13 @@ bullet_scale = 1.0
 hazard_drop_interval = 2.0
 hazard_size = 1.5
 hazard_height = 0.4
+points = 5
 metadata/_edit_vertical_guides_ = [-183.0]
 metadata/_edit_horizontal_guides_ = [31.0]
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1538378777]
-position = Vector2(0, 10)
+position = Vector2(-0.99999994, 14)
+scale = Vector2(0.8558962, 0.9172179)
 shape = SubResource("CapsuleShape2D_xub41")
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=2125008738]
@@ -263,6 +267,7 @@ animation = &"idle"
 collision_mask = 3
 
 [node name="CollisionShape2D" parent="HitBox" index="0" unique_id=1572808315]
+visible = false
 position = Vector2(0, 3.9999998)
 scale = Vector2(1.3599969, 2.0399995)
 shape = SubResource("CapsuleShape2D_d28ny")
@@ -288,5 +293,11 @@ scale_amount_min = 0.1
 scale_amount_max = 0.5
 color = Color(1, 0.8973333, 0.120000005, 1)
 color_initial_ramp = SubResource("Gradient_247hh")
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="." index="6" unique_id=794136930]
+stream = ExtResource("8_twko3")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." index="7" unique_id=1081942949]
+stream = ExtResource("9_1gdmr")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -6,7 +6,7 @@ const JUMP = preload("res://assests/sound/jumping.wav")
 const DAMAGE = preload("res://assests/sound/damage.wav")
 const WALKING = preload("res://assests/sound/walkingsound.wav")
 
-@export var fell_off_y: float = 100.0
+@export var fell_off_y: float = 350
 @export var lives: int = 4
 
 
@@ -18,7 +18,7 @@ const WALKING = preload("res://assests/sound/walkingsound.wav")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const GRAVITY: float = 690.0
-const JUMP_SPEED: float = -270.0
+const JUMP_SPEED: float = -300.0
 const RUN_SPEED: float = 120.0
 const MAX_FALL: float = 350.0
 const HURT_JUMP_VELOCITY: Vector2 = Vector2(0, -130.0)

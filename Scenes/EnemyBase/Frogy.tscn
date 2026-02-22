@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cqurinancjvqt" path="res://assests/Enemy/frogy.png" id="2_tktty"]
 [ext_resource type="Script" uid="uid://5asf8fq66luk" path="res://Scenes/EnemyBase/Frogy.gd" id="2_vtu14"]
 [ext_resource type="Script" uid="uid://dnp03h01yt77c" path="res://Scenes/EnemyBase/AnimatedSprite2d.gd" id="4_tktty"]
+[ext_resource type="AudioStream" uid="uid://cp03cgj713uri" path="res://assests/sound/FrogyRibbets.wav" id="5_vtu14"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tktty"]
 radius = 6.0
@@ -190,6 +191,9 @@ wait_time = 3.0
 one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="." index="5" unique_id=1679370441]
+
+[node name="RibbetSound" type="AudioStreamPlayer" parent="." index="6" unique_id=607171111]
+stream = ExtResource("5_vtu14")
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

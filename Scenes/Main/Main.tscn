@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d2vx1fom05rmr" path="res://Scenes/ParrallexBg/ParrallexBgMainMenu.tscn" id="9_7npjy"]
 [ext_resource type="Texture2D" uid="uid://cthp478gg6tqy" path="res://assests/buttons/ArenaButtonHover.png" id="10_18xdc"]
 [ext_resource type="AudioStream" uid="uid://dg3usjvecn4qy" path="res://assests/sound/BGMusicMainScreen.wav" id="11_dvlhv"]
+[ext_resource type="AudioStream" uid="uid://bjpdrj7sj3sfk" path="res://assests/sound/ButtonClick.wav" id="15_5ci8a"]
 
 [sub_resource type="Animation" id="Animation_4vhfm"]
 resource_name = "FlameColorChange"
@@ -213,5 +214,10 @@ color = Color(0, 0, 0, 0)
 stream = ExtResource("11_dvlhv")
 autoplay = true
 
+[node name="ButtonSound" type="AudioStreamPlayer" parent="." unique_id=1750638783]
+stream = ExtResource("15_5ci8a")
+
+[connection signal="pressed" from="VBButtons/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBButtons/ArenaButton" to="." method="_on_arena_pressed"]
+[connection signal="pressed" from="VBButtons/QuitButton" to="." method="_on_quit_pressed"]
 [connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

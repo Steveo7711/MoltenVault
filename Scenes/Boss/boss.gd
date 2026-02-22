@@ -22,6 +22,8 @@ class_name Boss
 @export var hazard_drop_interval: float = 3.0
 @export var hazard_size: float = 3.0
 @export var hazard_height: float = 0.5
+@onready var death_sound: AudioStreamPlayer = $DeathSound
+@onready var spawn_sound: AudioStreamPlayer = $SpawnSound
 
 enum Phase { ONE, TWO, THREE }
 enum Attack { AIMED_BURST, SPIRAL, BOUNCING }
@@ -50,6 +52,7 @@ func _ready() -> void:
 		await visible_notifier.screen_entered
 	
 	animated_sprite_2d.play("spawn")
+	spawn_sound.play()
 	await animated_sprite_2d.animation_finished
 	animated_sprite_2d.play("idle")
 	
@@ -154,6 +157,17 @@ func _do_aimed_burst() -> void:
 		await get_tree().create_timer(burst_delay).timeout
 
 func _do_spiral() -> void:
+	# Flash warning before firing
+	var original_color = animated_sprite_2d.modulate
+	var warning_color = Color(0.6, 0.0, 0.0, 1.0)  # dark red
+	
+	for i in range(3):
+		var tween = create_tween()
+		tween.tween_property(animated_sprite_2d, "modulate", warning_color, 0.15)
+		tween.tween_property(animated_sprite_2d, "modulate", original_color, 0.15)
+		await tween.finished
+	
+	# Now fire the spiral
 	for ring in range(spiral_rings):
 		if not is_instance_valid(self):
 			return
@@ -208,6 +222,8 @@ func die() -> void:
 			b.queue_free()
 	_active_bullets.clear()
 	animated_sprite_2d.play("die")
+	death_sound.pitch_scale = 1.2  # 20% faster
+	death_sound.play()
 	await animated_sprite_2d.animation_finished
 	SignalHub.emit_on_boss_killed()
 	super.die()

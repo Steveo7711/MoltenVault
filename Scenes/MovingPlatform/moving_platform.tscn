@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5cxhfr28faef"]
+[gd_scene format=3 uid="uid://c5cxhfr28faef"]
 
 [ext_resource type="Script" uid="uid://bv5emaoxvsvp1" path="res://Scenes/MovingPlatform/moving_platform.gd" id="1_fqhap"]
-[ext_resource type="Texture2D" uid="uid://h88berqxfvk3" path="res://assets/tiles/Terrain (16x16).png" id="1_xewek"]
+[ext_resource type="Texture2D" uid="uid://cfim0lyw244c1" path="res://assests/terrain/caveTerrain.png" id="1_xewek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqhap"]
 size = Vector2(46, 46)
 
-[node name="MovingPlatform" type="AnimatableBody2D"]
+[node name="MovingPlatform" type="AnimatableBody2D" unique_id=19129341]
 collision_mask = 0
 script = ExtResource("1_fqhap")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=694610133]
 texture = ExtResource("1_xewek")
 region_enabled = true
 region_rect = Rect2(0, 0, 47, 47)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1263668573]
 shape = SubResource("RectangleShape2D_fqhap")

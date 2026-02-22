@@ -8,9 +8,11 @@ class_name Main
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sound: AudioStreamPlayer = $Sound
 @onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var button_sound: AudioStreamPlayer = $ButtonSound
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	play_button.pressed.connect(_on_play_pressed)
 	arena_button.pressed.connect(_on_arena_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
@@ -20,11 +22,6 @@ func _ready() -> void:
 	particles.emitting = true
 	
 
-func _on_arena_pressed() -> void:
-	animation_player.play("fade_out")
-	await animation_player.animation_finished
-	GameManager.set_current_level_arena()
-	get_tree().change_scene_to_packed(GameManager.ARENA)
 
 func _populate_scores() -> void:
 	for child in scores_container.get_children():
@@ -45,11 +42,21 @@ func _populate_scores() -> void:
 
 
 func _on_play_pressed() -> void:
+	button_sound.play()
 	animation_player.play("fade_out")
 	await animation_player.animation_finished
-	GameManager.load_next_level()
+	GameManager.set_current_level_base()
+	GameManager.restart_level()
+
+func _on_arena_pressed() -> void:
+	button_sound.play()
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	GameManager.set_current_level_arena()
+	GameManager.restart_level()
 
 func _on_quit_pressed() -> void:
+	button_sound.play()
 	animation_player.play("fade_out")
 	await animation_player.animation_finished
 	get_tree().quit()

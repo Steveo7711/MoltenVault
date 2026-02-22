@@ -7,6 +7,9 @@ extends EnemyBase
 
 @onready var jump_timer: Timer = $JumpTimer
 @onready var shooter: Shooter = $Shooter
+@onready var ribbet_sound: AudioStreamPlayer = $RibbetSound
+
+
 
 const JUMP_VELOCITY_R: Vector2 = Vector2(100, -150)
 const JUMP_VELOCITY_L: Vector2 = Vector2(-100, -150)
@@ -18,6 +21,9 @@ func _ready() -> void:
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
 	animated_sprite_2d.frame_changed.connect(_on_frame_changed)
+	# Play ribbet on spawn with random pitch
+	ribbet_sound.pitch_scale = randf_range(0.7, 1.4)
+	ribbet_sound.play()
 
 func shoot() -> void:
 	if _player_ref == null or _seen_player == false:

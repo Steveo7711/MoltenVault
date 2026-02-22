@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cvhb216wxbchw" path="res://Scenes/Hud/hud.gd" id="1_r346g"]
 [ext_resource type="FontFile" uid="uid://n8ga6gjs7d5c" path="res://assests/fonts/NovaMono.ttf" id="2_88iar"]
 [ext_resource type="Texture2D" uid="uid://deovifi82xb8c" path="res://assests/pickups/pixelHeart.png" id="3_r346g"]
-[ext_resource type="AudioStream" uid="uid://db3t4jx5vcorm" path="res://assests/sound/BGMusic.wav" id="4_m635s"]
 [ext_resource type="AudioStream" uid="uid://3yngcdk3cjxt" path="res://assests/sound/BGMusicLoop.tres" id="5_n088g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r346g"]
@@ -33,11 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_r346g")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2055005747]
-stream = ExtResource("4_m635s")
-volume_db = -31.859
-autoplay = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1721255886]
 layout_mode = 1
@@ -161,13 +155,23 @@ label_settings = SubResource("LabelSettings_n088g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RestartLabel2" type="Label" parent="ColorRect/VBComplete" unique_id=854623631]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press Space to play again!
+Press Q to go to Main Menu!"
+label_settings = SubResource("LabelSettings_88iar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CompleteTimer" type="Timer" parent="." unique_id=1329554880]
 wait_time = 2.0
 one_shot = true
 
 [node name="Sound" type="AudioStreamPlayer" parent="." unique_id=910136036]
 stream = ExtResource("5_n088g")
-volume_db = -30.0
+volume_db = -6.937
 pitch_scale = 1.78
 
 [connection signal="timeout" from="CompleteTimer" to="." method="_on_complete_timer_timeout"]

@@ -5,6 +5,7 @@ class_name WaveManager
 @export var boss_scene: PackedScene
 @export var upgrade_menu_scene: PackedScene
 @export var kills_to_boss: int = 10
+@export var boss_spawn_marker: Marker2D
 
 var _kill_count: int = 0
 var _wave: int = 1
@@ -58,18 +59,26 @@ func spawn_boss() -> void:
 	if boss_scene == null:
 		return
 	await get_tree().create_timer(1.0).timeout
-	var best_marker = _spawn_markers[0]
-	var furthest_dist: float = 0.0
-	var player = get_tree().get_first_node_in_group(Constants.PLAYER_GROUP)
-	if player:
-		for marker in _spawn_markers:
-			var dist = marker.global_position.distance_to(player.global_position)
-			if dist > furthest_dist:
-				furthest_dist = dist
-				best_marker = marker
+	
+	var spawn_pos: Vector2
+	if boss_spawn_marker != null:
+		spawn_pos = boss_spawn_marker.global_position
+	else:
+		# fallback to furthest marker if not assigned
+		var best_marker = _spawn_markers[0]
+		var furthest_dist: float = 0.0
+		var player = get_tree().get_first_node_in_group(Constants.PLAYER_GROUP)
+		if player:
+			for marker in _spawn_markers:
+				var dist = marker.global_position.distance_to(player.global_position)
+				if dist > furthest_dist:
+					furthest_dist = dist
+					best_marker = marker
+		spawn_pos = best_marker.global_position
+
 	var boss = boss_scene.instantiate()
 	get_tree().current_scene.add_child(boss)
-	boss.global_position = best_marker.global_position + Vector2(0, -32)
+	boss.global_position = spawn_pos + Vector2(0, -32)
 	if SignalHub.on_boss_killed.is_connected(_on_boss_killed):
 		SignalHub.on_boss_killed.disconnect(_on_boss_killed)
 	SignalHub.on_boss_killed.connect(_on_boss_killed)

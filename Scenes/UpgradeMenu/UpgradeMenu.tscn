@@ -58,6 +58,14 @@ layout_mode = 2
 theme = ExtResource("1_j3qw8")
 text = "Enemies do more dmg"
 
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer" unique_id=333963965]
+layout_mode = 2
+text = "Press q to go to main menu"
+label_settings = SubResource("LabelSettings_j3qw8")
+horizontal_alignment = 1
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="." unique_id=230570631]
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MoreEnemisButton" to="." method="_on_more_enemies_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MoreHealthButton" to="." method="_on_more_health_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MoreDamageButton" to="." method="_on_more_damage_pressed"]
